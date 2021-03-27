@@ -1,0 +1,32 @@
+.App {
+  margin: 24px;
+}
+
+.ant-col-12 {
+  flex: 0 0 100%;
+  max-width: 100%;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.flex-bottom {
+  display: flex;
+  align-items: flex-end;
+}
+
+footer {
+  max-height: 5vh;
+  position: absolute;
+  bottom: 0px;
+}
+

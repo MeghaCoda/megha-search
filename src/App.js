@@ -1,23 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import { Route } from 'react-router-dom'
+import SearchHome from "./components/search_home.tsx"
+import { Col, Row } from "antd"
+import "antd/dist/antd.css"
+import "./assets/scss/App.scss"
+
+const About = () => {
+  return (
+    <div>
+      <h2>About</h2>
+    </div>
+  );
+}
+const Dashboard = () => {
+  return (
+    <div>
+      <h2>Dashboard</h2>
+    </div>
+  );
+}
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <SearchHome />
+      <div>
+          <Route path='/about' component={About} />
+          <Route path='/dashboard' component={Dashboard} />
+      </div>
+      <footer>
+        <Row>
+          <Col span="12">Brought to you from Meghan B to Richard D!</Col>
+        </Row>
+
+      </footer>
     </div>
   );
 }
