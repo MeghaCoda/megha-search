@@ -11,16 +11,6 @@ export const generateSearchUrl = (queryString: string):string => {
     return `${baseUrl}?${queryString}`
 }
 
-export const fetchResults = (queryString: string): any => { //eslint:disable
-    const url = generateSearchUrl(queryString)
-    console.log(url) 
-    fetch(url).then((response: any) => {
-        console.log(response)
-
-    })
-
-}
-
 export const getQueryStringsFromState = (state: SearchQueryParams):any => { // booooo any's >_<
     let anyState = state as any 
     const keys = Object.keys(anyState)

@@ -1,7 +1,9 @@
-import { useState } from "react"
+import { useState, createContext } from "react"
 import { Col, Row, Button, Input } from 'antd'
-import { isValidQuery, fetchResults, getQueryStringsFromState } from "../helpers/search"
-import { SearchQueryParams } from "../d"
+import { isValidQuery, getQueryStringsFromState, generateSearchUrl } from "../helpers/search"
+import { SearchQueryParams, APIError, DataState } from "../d"
+import SearchResults from "./search_results"
+import axios from "axios"
 
 const SearchHome: React.FC = () => {
 
@@ -15,19 +17,37 @@ const SearchHome: React.FC = () => {
         location: ""
     }
 
+    const initSearchDataState: DataState = {
+        isFetching: false,
+        response: null
+    }
+
     const [searchState, setSearchState] = useState(initSearchState)
-
-    
-
+    const [dataState, setDataState] = useState(initSearchDataState)
 
     const invalidQuery = !isValidQuery(searchState.name)
+
+    const getSearchResults = (queryString: string): any => { //eslint:disable
+        setDataState({...dataState, isFetching: true})
+        const url = generateSearchUrl(queryString)
+        console.log(url) 
+        axios.get(url).then((response: any) => {
+            const data = response.data
+            setDataState({response: data, isFetching: false})
+        })
+        .catch((message: APIError) => {
+            return new Error(`${message.code}: ${message.error}`)
+        })
+    }
 
     const submitSearch = () => {
         if (!invalidQuery) { 
             const queryStr: any = getQueryStringsFromState(searchState)
-            const data: any = fetchResults(queryStr)
+            getSearchResults(queryStr)
         }
     }
+
+    const SearchResultContext = createContext(initSearchDataState)
     
 
     return (
@@ -50,6 +70,11 @@ const SearchHome: React.FC = () => {
             </Row>
         </Col>
         </Row>
+        {!!dataState.response?.results?.length && <>
+        <SearchResultContext.Provider value={dataState}>
+            <SearchResults results={dataState.response.results} />
+        </SearchResultContext.Provider>
+        </>}
         </div>
     )
 

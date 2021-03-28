@@ -25,8 +25,9 @@ export interface SearchResult {
     publication_date: string,
     short_name: string,
     model_type: string,
-    id: number
-    locations: Location[]
+    id: number,
+    levels: Level[],
+    locations: Location[],
     categories: Category[],
     tags: any[], //eslint:disable-line - None of the results I queried had tags. Placeholder until the data shape is known. 
     refs: LandingPage,
@@ -68,4 +69,14 @@ export interface stringSearchQueryParams {
     category?: string,
     level?: string,
     location?: string
+}
+
+export interface APIError {
+    code: number,
+    error: string
+}
+
+export interface DataState {
+    isFetching: boolean
+    response: SearchResponse | null
 }
