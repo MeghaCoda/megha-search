@@ -1,31 +1,18 @@
-import { Route } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import SearchHome from "./components/search_home.tsx"
+import FullResult from "./components/full_result.tsx"
 import { Col, Row } from "antd"
 import "antd/dist/antd.css"
 import "./assets/scss/App.scss"
-
-const About = () => {
-  return (
-    <div>
-      <h2>About</h2>
-    </div>
-  );
-}
-const Dashboard = () => {
-  return (
-    <div>
-      <h2>Dashboard</h2>
-    </div>
-  );
-}
 
 function App() {
   return (
     <div className="App">
       <SearchHome />
       <div>
-          <Route path='/about' component={About} />
-          <Route path='/dashboard' component={Dashboard} />
+        <Switch>
+          <Route path="/:id" component={<FullResult />} />
+        </Switch>
       </div>
       <footer>
         <Row>
