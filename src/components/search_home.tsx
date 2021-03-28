@@ -1,9 +1,35 @@
 import { useState } from "react"
 import { Col, Row, Button, Input } from 'antd'
-import { isValidQuery } from "../helpers/search"
+import { isValidQuery, fetchResults, getQueryStringsFromState } from "../helpers/search"
+import { SearchQueryParams } from "../d"
+
 const SearchHome: React.FC = () => {
-    const [searchQuery, setSearchQuery] = useState("")
-    const invalidQuery = !isValidQuery(searchQuery)
+
+    const initSearchState: SearchQueryParams = {
+        name: "",
+        page: 1,
+        descending: true,
+        company: "",
+        category: "",
+        level: "",
+        location: ""
+    }
+
+    const [searchState, setSearchState] = useState(initSearchState)
+
+    
+
+
+    const invalidQuery = !isValidQuery(searchState.name)
+
+    const submitSearch = () => {
+        if (!invalidQuery) { 
+            const queryStr: any = getQueryStringsFromState(searchState)
+            const data: any = fetchResults(queryStr)
+        }
+    }
+    
+
     return (
         <div className="search-bar">
         <Row>
@@ -12,12 +38,14 @@ const SearchHome: React.FC = () => {
            <Row>
             <Col span={3}>
                 <label htmlFor="search-input">Search for jobs by title:</label>
-                <Input name="search-input" type="text" onChange={(e) => setSearchQuery(e.target.value)}></Input>
+                <Input name="search-input" type="text" 
+                onChange={(e) => setSearchState({...searchState, name: (e.target.value)})}
+                onPressEnter={() => submitSearch()} />
 
             
             </Col>
             <Col span={4} offset={1} className="flex-bottom">
-            <Button type="primary" name="submit" disabled={invalidQuery}>Search</Button>
+            <Button type="primary" name="submit" disabled={invalidQuery} onClick={() => submitSearch()}>Search</Button>
             </Col>
             </Row>
         </Col>

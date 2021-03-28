@@ -42,5 +42,30 @@ export interface SearchResponse {
     timed_out: boolean,
     total: number,
     results: SearchResult[]
+}
 
+export interface SearchQueryParams {
+    name: string, // functionally this is the job title
+    page?: number,
+    descending?: boolean,
+    company?: string,
+    category?: string,
+    level?: string,
+    location?: string
+}
+
+export const initSearchParams = {
+    page: 1,
+    descending: true,
+    name: ""
+}
+
+export interface stringSearchQueryParams {
+    name: string, 
+    page?: string,
+    descending?: string,
+    company?: string,
+    category?: string,
+    level?: string,
+    location?: string
 }
