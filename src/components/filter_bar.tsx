@@ -1,20 +1,14 @@
 import "../assets/scss/filter_bar.scss"
 import { SearchResult } from "../d"
+import { Select } from "antd"
 
 interface FilterProps {
-    results: SearchResult[]
+    results: SearchResult[],
+    onSelect: Function
     
 }
-
-/*
-interface FilterProps {
-    results: {
-        levels: Level[],
-    locations: Location[],
-    categories: Category[],
-    company: Company
-    } */
-
+    /* my usual trick of converting the Array to a Set and back again wasn't working, so I wrote this.
+    There's probably a better solution out there, but it works */
     const removeDupes = (arr: any):any => {
         let newArr: any = []
         for (let item of arr) {
@@ -32,6 +26,7 @@ interface FilterProps {
         return newArr
     }
 const FilterBar: React.FC<FilterProps> = props => {
+    const { onSelect } = props
 
     const levels = props.results.map(result =>  result.levels.map(level => level.name))
     const companies = props.results.map(result => result.company.name)
@@ -41,11 +36,6 @@ const FilterBar: React.FC<FilterProps> = props => {
     const uniqueCompanies = removeDupes(companies)
     const uniqueLocations = removeDupes(locations)
     const uniqueCategories = removeDupes(categories)
-    /* for some reason my usual technique of converting to a Set to remove duplicates isn't working.
-    Tech debt for later */
-
-    /* Note: the Antd design library's dropdown components, while pretty, are hover-based! 
-    Not accessibility friendly or mobile friendly. Going for selects instead.  */
 
     return (
         <div className="filter-bar">
@@ -53,35 +43,35 @@ const FilterBar: React.FC<FilterProps> = props => {
             <div className="filters">
             <div className="filter-container">
                 <span className="filter-label">Company</span>
-                <select name="company">
-                {uniqueCompanies.map((company:any) => {
-                        return <option value={company}>{company}</option>
+                <Select style={{width: "200px"}} onChange={(value) => onSelect({ company: [value]})}>
+                {uniqueCompanies.map((company:any, i: number) => {
+                        return <Select.Option key={i} value={company}>{company}</Select.Option>
                     })}
-                </select>
+                </Select>
             </div>
             <div className="filter-container">
                 <span className="filter-label">Level</span>
-                <select name="level">
-                    {uniqueLevels.map((level:any) => {
-                        return <option value={level}>{level}</option>
+                <Select style={{width: "200px"}} onChange={(value) => onSelect({ level: [value]})}>
+                    {uniqueLevels.map((level:any, i: number) => {
+                        return <Select.Option key={i} value={level}>{level}</Select.Option>
                     })}
-                </select>
+                </Select>
             </div>
             <div className="filter-container">
                 <span className="filter-label">Location</span>
-                <select name="location">
-                    {uniqueLocations.map((location:any) => {
-                        return <option value={location}>{location}</option>
+                <Select style={{width: "200px"}} onChange={(value) => onSelect({ location: [value]})}>
+                    {uniqueLocations.map((location:any, i: number) => {
+                        return <Select.Option key={i} value={location}>{location}</Select.Option>
                     })}
-                </select>
+                </Select>
             </div>
             <div className="filter-container">
                 <span className="filter-label">Job Category</span>
-                <select name="category">
-                    {uniqueCategories.map((category:any) => {
-                        return <option value={category}>{category}</option>
+                <Select style={{width: "200px"}} onChange={(value) => onSelect({ category: [value]})}>
+                    {uniqueCategories.map((category:any, i: number) => {
+                        return <Select.Option key={i} value={category}>{category}</Select.Option>
                     })}
-                </select>
+                </Select>
             </div>
         </div>
         </div>

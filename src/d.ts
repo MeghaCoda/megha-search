@@ -79,4 +79,5 @@ export interface APIError {
 export interface DataState {
     isFetching: boolean
     response: SearchResponse | null
+    filteredResponse: SearchResponse | null
 }

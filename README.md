@@ -1,8 +1,9 @@
 # Getting Started 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). It uses Muse's [Public API](https://www.themuse.com/developers) and allows the user to query job searches by title. 
-[Sanitize HTML](https://www.npmjs.com/package/sanitize-html) was used to sanitize HTML returned from the API. 
-Site is designed to be navigable via tabs for accesibility purposes.
+[Sanitize HTML](https://www.npmjs.com/package/sanitize-html) was used to sanitize HTML returned from the API for security purposes. 
+API request are made using [Axios](https://www.npmjs.com/package/axios)
+Site is designed to be navigable via tabs for accessibility purposes.
 Site is mobile-friendly.
 
 In order to install this project, make sure you have:
@@ -34,6 +35,7 @@ Launches the test runner in the interactive watch mode.\
 - Add usage of Context - I got tripped up trying to make Context work with Typescript
 - Improve JS bundling to remove unused Javascript, which is making the app painfully slow on mobile 0_0
 - Greatly expand testing
+- Consider a library other than Ant Design Library. While it might be pretty, it's SLOWWWW.
 - Use global variables in sass files for spacing and colors
 - Add functional page navigation
 - Add ability to search by company

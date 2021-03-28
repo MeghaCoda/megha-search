@@ -20,7 +20,8 @@ const SearchHome: React.FC = () => {
 
     const initSearchDataState: DataState = {
         isFetching: false,
-        response: null
+        response: null,
+        filteredResponse: null
     }
 
     const [searchState, setSearchState] = useState(initSearchState)
@@ -29,11 +30,11 @@ const SearchHome: React.FC = () => {
     const invalidQuery = !isValidQuery(searchState.name)
 
     const getSearchResults = (queryString: string): any => { //eslint:disable
-        setDataState({...dataState, isFetching: true})
+        setDataState({...dataState, isFetching: true, filteredResponse: null})
         const url = generateSearchUrl(queryString)
         axios.get(url).then((response: any) => {
             const data = response.data
-            setDataState({response: data, isFetching: false})
+            setDataState({response: data, isFetching: false, filteredResponse: data})
         })
         .catch((message: APIError) => {
             return new Error(`${message.code}: ${message.error}`)
@@ -45,6 +46,11 @@ const SearchHome: React.FC = () => {
             const queryStr: any = getQueryStringsFromState(searchState)
             getSearchResults(queryStr)
         }
+    }
+
+    const filterResults = (filterObj: any) => {
+        setDataState({...dataState, filteredResponse: {...dataState.filteredResponse, ...filterObj}})
+
     }
 
     return (
@@ -65,8 +71,8 @@ const SearchHome: React.FC = () => {
             </Row>
         </Col>
         </Row>
-        {!!dataState.response?.results?.length && <>
-        <FilterBar results={dataState.response.results} />
+        {!!dataState.filteredResponse?.results?.length && !!dataState.response?.results?.length && <>
+        <FilterBar results={dataState.filteredResponse.results} onSelect={filterResults} />
         
             <SearchResults 
             page={dataState.response.page}

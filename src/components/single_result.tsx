@@ -31,7 +31,7 @@ const SingleResult: React.FC<Props> = props => {
     return (
         <div className="result" style={{ borderTop: "1px solid gray" }}>
             <div className="result-label title">{name}</div>
-            <div className="id"><span className="result-label">ID:</span> {id}</div>
+            <div className="company"><span className="result-label">Company:</span> {company.name}</div>
 
             {levels.length && <div className="levels"><span className="result-label">Levels:</span>
             {levels.map((level, i) => {
@@ -57,6 +57,7 @@ const SingleResult: React.FC<Props> = props => {
                 </span>
             })}
             </div>}
+            <div className="id"><span className="result-label">ID:</span> {id}</div>
             <div>
                 <span className="result-label description">Description:</span> {shortDesc}...
             </div>
