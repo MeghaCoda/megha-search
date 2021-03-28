@@ -5,6 +5,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 API request are made using [Axios](https://www.npmjs.com/package/axios).
 Site is designed to be navigable via tabs for accessibility purposes.
 Site is also mobile-friendly.
+Currently only tested in Chrome.
 
 In order to install this project, make sure you have:
 - Node
@@ -40,6 +41,7 @@ Launches the test runner in the interactive watch mode.\
 - Add testing
 - Add ESLint comments 
 - Consider a library other than Ant Design Library. While it might be pretty, it's SLOWWWW.
+- Test in other browsers
 - Use global variables in sass files for spacing and colors
 - Add functional page navigation
 - Add ability to search by company

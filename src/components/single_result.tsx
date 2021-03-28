@@ -1,35 +1,28 @@
 import React from "react"
 import { SearchResult } from "../d"
+import { generateSearchUrlFromID } from "../helpers/search"
+import FullResult from "./full_result"
 import "../assets/scss/single_result.scss"
 
 interface Props {
     result: SearchResult
+    fullView?: boolean
 }
-
-/*
-  contents: string, // unformatted HTML - needs to be sanitized
-    name: string,
-    id: number,
-    levels: Level[],
-    locations: Location[],
-    categories: Category[],
-    refs: LandingPage,
-    company: Company
-*/
 
 const SingleResult: React.FC<Props> = props => {
 
-    /* I know I could chain some of the functions below, but I prefer adding variables for
-    each step to make it easy to read and debug. */
-
     const { name, id, levels, locations, categories, refs, company } = props.result
 
-    const contentPreview: string = props.result.contents.substring(0, 200) // get the first 200 chars
-    const textOnlyPreview = contentPreview.replace(/(<([^>]+)>)/gi, ""); // strip html
-    const shortDesc = textOnlyPreview.substring(0, 100) // clip it to 100 chars
+    let contentPreview: string, textOnlyPreview, shortDesc
+
+    if (!props.fullView) {
+    contentPreview = props.result.contents.substring(0, 200) // get the first 200 chars
+    textOnlyPreview = contentPreview.replace(/(<([^>]+)>)/gi, ""); // strip html
+    shortDesc = textOnlyPreview.substring(0, 100) // clip it to 100 chars
+    }
 
     return (
-        <div className="result" style={{ borderTop: "1px solid gray" }}>
+        <div className="result text-left" style={{ borderTop: "1px solid gray" }}>
             <div className="result-label title">{name}</div>
             <div className="company"><span className="result-label">Company:</span> {company.name}</div>
 
@@ -58,11 +51,15 @@ const SingleResult: React.FC<Props> = props => {
             })}
             </div>}
             <div className="id"><span className="result-label">ID:</span> {id}</div>
-            <div>
-                <span className="result-label description">Description:</span> {shortDesc}...
-            </div>
+            {!props.fullView && <div>
+                <span className="result-label description">Description:</span> {shortDesc}... 
+                <a className="view-full-description"
+                href={`${window.location.origin}?id=${id}`}
+                aria-label="View Full Description">View Full Job Description</a>
+            </div>}
+            {props.fullView && <FullResult result={props.result} />}
 
-            <a href={refs.landing_page} target="#blank">View original listing</a>
+            <a className="view-original" href={refs.landing_page} target="#blank">View original listing</a>
 
         </div>
     )

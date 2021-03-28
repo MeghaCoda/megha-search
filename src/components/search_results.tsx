@@ -28,6 +28,12 @@ const SearchResults: React.FC<Props> = props => {
                     <div>{`Page ${props.page} of ${props.pageCount}`}</div>
                 </Col>
             </Row>
+            <footer>
+        <Row>
+          <Col span="12">Brought to you from Meghan B to Richard D!</Col>
+        </Row>
+
+      </footer>
         </>
     )
 

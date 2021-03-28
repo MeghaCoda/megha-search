@@ -1,9 +1,12 @@
 import { useState, useEffect } from "react"
+import { useLocation } from "react-router-dom"
 import { Col, Row, Button, Input } from 'antd'
 import { isValidQuery, getQueryStringsFromState, generateSearchUrl } from "../helpers/search"
 import { SearchQueryParams, APIError, DataState } from "../d"
 import SearchResults from "./search_results"
+import SingleResultPage from "./single_result_page"
 import FilterBar from "./filter_bar"
+import QueryString from "query-string"
 import axios from "axios"
 
 const SearchHome: React.FC = () => {
@@ -25,6 +28,10 @@ const SearchHome: React.FC = () => {
         filteredResponse: null,
         filters: null
     }
+
+    const location = useLocation()
+    const initialQueries = QueryString.parse(location.search)
+    const initialID: string | undefined = initialQueries?.id as string
 
     const [searchState, setSearchState] = useState(initSearchState)
     const [dataState, setDataState] = useState(initSearchDataState)
@@ -90,6 +97,22 @@ const SearchHome: React.FC = () => {
         setDataState({...dataState, filters: null})
     }
 
+    if (initialID) {
+        return (
+        <>
+        <Row>
+        <Col span={12} className="full-width-col text-center">
+           <h1>Muse Searcher</h1>
+           <a href={window.location.origin}>Go to search</a>
+           <SingleResultPage id={initialID} />
+           </Col>
+           </Row>
+           </>
+
+
+        )
+    }
+
 
     return (
         <div className="search-bar">
@@ -109,6 +132,7 @@ const SearchHome: React.FC = () => {
             </Row>
         </Col>
         </Row>
+        
         {!!dataState.response?.results?.length && <FilterBar clearFilters={clearFilters} results={dataState?.response.results} onSelect={filterResults} />}
         {!dataState.filteredResponse?.results?.length && dataState.hasFetched && <div>No results</div>}
         {!!dataState.filteredResponse?.results?.length && !!dataState.response?.results?.length && <>

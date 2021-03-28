@@ -7,12 +7,6 @@ function App() {
   return (
     <div className="App">
       <SearchHome />
-      <footer>
-        <Row>
-          <Col span="12">Brought to you from Meghan B to Richard D!</Col>
-        </Row>
-
-      </footer>
     </div>
   );
 }
