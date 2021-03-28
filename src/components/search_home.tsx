@@ -72,7 +72,10 @@ const SearchHome: React.FC = () => {
         </Row>
         {!!dataState.response?.results?.length && <>
         <SearchResultContext.Provider value={dataState}>
-            <SearchResults results={dataState.response.results} />
+            <SearchResults 
+            page={dataState.response.page}
+            pageCount={dataState.response.page_count}
+            results={dataState.response.results} />
         </SearchResultContext.Provider>
         </>}
         </div>
