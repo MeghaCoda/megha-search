@@ -59,8 +59,6 @@ const SearchHome: React.FC = () => {
                 <Input name="search-input" type="text" 
                 onChange={(e) => setSearchState({...searchState, name: (e.target.value)})}
                 onPressEnter={() => submitSearch()} />
-
-            
             </Col>
             <Col span={4} offset={1} className="flex-bottom">
             <Button type="primary" name="submit" disabled={invalidQuery} onClick={() => submitSearch()}>Search</Button>

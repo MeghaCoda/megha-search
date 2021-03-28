@@ -1,0 +1,43 @@
+.filter-bar {
+
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    margin: 30px 0;
+    padding: 12px;
+
+    .tile {
+        display: block;
+    }
+    .label {
+        font-weight: bold;
+    }
+
+    .filters {
+        display: flex;
+    }
+
+    .filter-container {
+        padding: 8px;
+        margin: 0 5px;
+        background: lightgrey;
+        border-radius: 5px;
+        border: 1px solid lightgrey;
+    }
+
+    .filter-label {
+        margin-right: 10px;
+    }
+}
+
+@media (max-width: 600px) {
+    .filter-bar {
+        .filters {
+        display: block;
+        }
+        .filter-container {
+            display: block;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+    }
+}
