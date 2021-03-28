@@ -1,5 +1,6 @@
 import React from "react"
 import { SearchResult } from "../d"
+import "../assets/scss/single_result.scss"
 
 interface Props {
     result: SearchResult
@@ -34,11 +35,11 @@ const SingleResult: React.FC<Props> = props => {
     console.log(JSON.stringify(levels))
 
     return (
-        <div className="result" style={{ border: "1px solid gray" }}>
-            <div className="title">{name}</div>
-            <div className="id">ID: {id}</div>
+        <div className="result" style={{ borderTop: "1px solid gray" }}>
+            <div className="result-label title">{name}</div>
+            <div className="id"><span className="result-label">ID:</span> {id}</div>
 
-            {levels.length && <div className="result-label levels">Levels:
+            {levels.length && <div className="levels"><span className="result-label">Levels:</span>
             {levels.map(level => {
                 return <span>
                     {level.name}
@@ -46,7 +47,7 @@ const SingleResult: React.FC<Props> = props => {
             })}
             </div>}
 
-            {locations.length && <div className="result-label locations">Locations:
+            {locations.length && <div className="locations"><span className="result-label">Locations:</span>
             {locations.map(location => {
                 return <span>
                     {location.name}
@@ -54,7 +55,8 @@ const SingleResult: React.FC<Props> = props => {
             })}
             </div>}
 
-            {categories.length && <div className="result-label categories">Categories:
+            {categories.length && <div className="categories">
+            <span className="result-label">Categories:</span>
             {categories.map(category => {
                 return <span>
                     {category.name}
@@ -62,7 +64,7 @@ const SingleResult: React.FC<Props> = props => {
             })}
             </div>}
             <div>
-                Description: {shortDesc}...
+                <span className="result-label description">Description:</span> {shortDesc}...
             </div>
 
             <a href={refs.landing_page} target="#blank">View original listing</a>
