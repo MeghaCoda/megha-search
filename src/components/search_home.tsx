@@ -45,7 +45,7 @@ const SearchHome: React.FC = () => {
                     results = results?.filter((result: any) => !!result.locations.find((location: any) => location.name === filters[key]))
                     break
                 case "category":
-                    results = results?.filter((result: any) => result.company.name === filters[key])
+                    results = results?.filter((result: any) => !!result.categories?.find((category: any) => category.name === filters[key]))
                     break
                 default:
                     break

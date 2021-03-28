@@ -28,15 +28,18 @@ The page will reload if you make edits.
 
 Launches the test runner in the interactive watch mode.\
 
+### Known bugs
+- pressing the down key does not let you navigate through filter select elements - not accessible
+- Filters do not clear properly 
 
 ### Roadmap
 
 - Remove usage of 'any' type throughout the application
 - Add usage of Context - I got tripped up trying to make Context work with Typescript
 - Improve JS bundling to remove unused Javascript, which is making the app painfully slow on mobile 0_0
-- Greatly expand testing
+- Add testing
+- Add ESLint comments 
 - Consider a library other than Ant Design Library. While it might be pretty, it's SLOWWWW.
-- Ensure proper clearing of filters - currently battling ant library's Select default settings
 - Use global variables in sass files for spacing and colors
 - Add functional page navigation
 - Add ability to search by company
