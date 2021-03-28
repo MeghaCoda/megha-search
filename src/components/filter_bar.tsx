@@ -43,7 +43,7 @@ const FilterBar: React.FC<FilterProps> = props => {
             <div className="filters">
             <div className="filter-container">
                 <span className="filter-label">Company</span>
-                <Select style={{width: "200px"}} onChange={(value) => onSelect({ company: [value]})}>
+                <Select style={{width: "200px"}} onChange={(value) => onSelect({ company: value})}>
                 {uniqueCompanies.map((company:any, i: number) => {
                         return <Select.Option key={i} value={company}>{company}</Select.Option>
                     })}
@@ -51,7 +51,7 @@ const FilterBar: React.FC<FilterProps> = props => {
             </div>
             <div className="filter-container">
                 <span className="filter-label">Level</span>
-                <Select style={{width: "200px"}} onChange={(value) => onSelect({ level: [value]})}>
+                <Select style={{width: "200px"}} onChange={(value) => onSelect({ level: value})}>
                     {uniqueLevels.map((level:any, i: number) => {
                         return <Select.Option key={i} value={level}>{level}</Select.Option>
                     })}
@@ -59,7 +59,7 @@ const FilterBar: React.FC<FilterProps> = props => {
             </div>
             <div className="filter-container">
                 <span className="filter-label">Location</span>
-                <Select style={{width: "200px"}} onChange={(value) => onSelect({ location: [value]})}>
+                <Select style={{width: "200px"}} onChange={(value) => onSelect({ location: value})}>
                     {uniqueLocations.map((location:any, i: number) => {
                         return <Select.Option key={i} value={location}>{location}</Select.Option>
                     })}
@@ -67,7 +67,7 @@ const FilterBar: React.FC<FilterProps> = props => {
             </div>
             <div className="filter-container">
                 <span className="filter-label">Job Category</span>
-                <Select style={{width: "200px"}} onChange={(value) => onSelect({ category: [value]})}>
+                <Select style={{width: "200px"}} onChange={(value) => onSelect({ category: value})}>
                     {uniqueCategories.map((category:any, i: number) => {
                         return <Select.Option key={i} value={category}>{category}</Select.Option>
                     })}

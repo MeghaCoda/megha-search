@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Col, Row, Button, Input } from 'antd'
 import { isValidQuery, getQueryStringsFromState, generateSearchUrl } from "../helpers/search"
 import { SearchQueryParams, APIError, DataState } from "../d"
@@ -21,11 +21,46 @@ const SearchHome: React.FC = () => {
     const initSearchDataState: DataState = {
         isFetching: false,
         response: null,
-        filteredResponse: null
+        filteredResponse: null,
+        filters: null
     }
 
     const [searchState, setSearchState] = useState(initSearchState)
     const [dataState, setDataState] = useState(initSearchDataState)
+
+    useEffect(() => {
+        let results: any = dataState.response?.results
+        let filters: any = dataState.filters
+        if (!!results && !!filters) {
+            debugger
+        Object.keys(filters).map((key: any) => {
+            switch(key) {
+                case "company":
+                    results = results?.filter((result: any) => result.company.name === filters[key])
+                    debugger
+                    break
+                case "level":
+                    results = results?.filter((result: any) => [...result.levels.filter((level: any) => level.name === filters[key])])
+                    break
+                case "location":
+                    results = results?.filter((result: any) => [...result.locations.filter((location: any) => location.name === filters[key])])
+                    break
+                case "category":
+                    results = results?.filter((result: any) => result.company.name === filters[key])
+                    break
+                default:
+                    break
+
+                }
+            }
+        )
+        }
+        let newFilteredResponse = {...dataState.filteredResponse, results}
+        setDataState(
+            {...dataState, 
+                filteredResponse: {...newFilteredResponse} })
+
+    }, [dataState.filters])
 
     const invalidQuery = !isValidQuery(searchState.name)
 
@@ -34,7 +69,7 @@ const SearchHome: React.FC = () => {
         const url = generateSearchUrl(queryString)
         axios.get(url).then((response: any) => {
             const data = response.data
-            setDataState({response: data, isFetching: false, filteredResponse: data})
+            setDataState({response: data, isFetching: false, filteredResponse: data, filters: null})
         })
         .catch((message: APIError) => {
             return new Error(`${message.code}: ${message.error}`)
@@ -49,9 +84,11 @@ const SearchHome: React.FC = () => {
     }
 
     const filterResults = (filterObj: any) => {
-        setDataState({...dataState, filteredResponse: {...dataState.filteredResponse, ...filterObj}})
+        setDataState({...dataState, filters: {...dataState.filters, ...filterObj}})
 
     }
+
+    console.log(dataState)
 
     return (
         <div className="search-bar">
@@ -72,12 +109,12 @@ const SearchHome: React.FC = () => {
         </Col>
         </Row>
         {!!dataState.filteredResponse?.results?.length && !!dataState.response?.results?.length && <>
-        <FilterBar results={dataState.filteredResponse.results} onSelect={filterResults} />
+        <FilterBar results={dataState.response.results} onSelect={filterResults} />
         
             <SearchResults 
             page={dataState.response.page}
             pageCount={dataState.response.page_count}
-            results={dataState.response.results} />
+            results={dataState.filteredResponse.results} />
         
         </>}
         </div>

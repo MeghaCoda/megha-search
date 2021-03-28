@@ -76,8 +76,16 @@ export interface APIError {
     error: string
 }
 
+export interface Filters {
+    company?: string,
+    level?: string,
+    location?: string,
+    category?: string
+}
+
 export interface DataState {
     isFetching: boolean
     response: SearchResponse | null
-    filteredResponse: SearchResponse | null
+    filteredResponse: any 
+    filters: Filters | null
 }
