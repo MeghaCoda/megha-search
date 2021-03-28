@@ -1,8 +1,9 @@
-import { useState, createContext } from "react"
+import { useState } from "react"
 import { Col, Row, Button, Input } from 'antd'
 import { isValidQuery, getQueryStringsFromState, generateSearchUrl } from "../helpers/search"
 import { SearchQueryParams, APIError, DataState } from "../d"
 import SearchResults from "./search_results"
+import FilterBar from "./filter_bar"
 import axios from "axios"
 
 const SearchHome: React.FC = () => {
@@ -47,16 +48,13 @@ const SearchHome: React.FC = () => {
         }
     }
 
-    const SearchResultContext = createContext(initSearchDataState)
-    
-
     return (
         <div className="search-bar">
         <Row>
-        <Col span={12} offset={2} className="full-width-col">
+        <Col span={12} className="full-width-col text-center">
            <h1>Muse Searcher</h1>
            <Row>
-            <Col span={3}>
+            <Col xs={12} lg={3}>
                 <label htmlFor="search-input">Search for jobs by title:</label>
                 <Input name="search-input" type="text" 
                 onChange={(e) => setSearchState({...searchState, name: (e.target.value)})}
@@ -71,12 +69,13 @@ const SearchHome: React.FC = () => {
         </Col>
         </Row>
         {!!dataState.response?.results?.length && <>
-        <SearchResultContext.Provider value={dataState}>
+        <FilterBar />
+        
             <SearchResults 
             page={dataState.response.page}
             pageCount={dataState.response.page_count}
             results={dataState.response.results} />
-        </SearchResultContext.Provider>
+        
         </>}
         </div>
     )
