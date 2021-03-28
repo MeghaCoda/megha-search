@@ -37,3 +37,4 @@ Launches the test runner in the interactive watch mode.\
 - Use global variables in sass files for spacing and colors
 - Add functional page navigation
 - Add ability to search by company
+- using indexes as keys is a potentially bad idea; consider using uuid or something similar for unique key generation

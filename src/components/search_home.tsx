@@ -31,7 +31,6 @@ const SearchHome: React.FC = () => {
     const getSearchResults = (queryString: string): any => { //eslint:disable
         setDataState({...dataState, isFetching: true})
         const url = generateSearchUrl(queryString)
-        console.log(url) 
         axios.get(url).then((response: any) => {
             const data = response.data
             setDataState({response: data, isFetching: false})
@@ -67,7 +66,7 @@ const SearchHome: React.FC = () => {
         </Col>
         </Row>
         {!!dataState.response?.results?.length && <>
-        <FilterBar />
+        <FilterBar results={dataState.response.results} />
         
             <SearchResults 
             page={dataState.response.page}

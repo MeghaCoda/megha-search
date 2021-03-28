@@ -28,37 +28,31 @@ const SingleResult: React.FC<Props> = props => {
     const textOnlyPreview = contentPreview.replace(/(<([^>]+)>)/gi, ""); // strip html
     const shortDesc = textOnlyPreview.substring(0, 100) // clip it to 100 chars
 
-
-    const openFullView = () => { }
-
-    console.log('Single result:')
-    console.log(JSON.stringify(levels))
-
     return (
         <div className="result" style={{ borderTop: "1px solid gray" }}>
             <div className="result-label title">{name}</div>
             <div className="id"><span className="result-label">ID:</span> {id}</div>
 
             {levels.length && <div className="levels"><span className="result-label">Levels:</span>
-            {levels.map(level => {
-                return <span>
+            {levels.map((level, i) => {
+                return <span key={i}>
                     {level.name}
                 </span>
             })}
             </div>}
 
             {locations.length && <div className="locations"><span className="result-label">Locations:</span>
-            {locations.map(location => {
-                return <span>
+            {locations.map((location, i) => {
+                return <span key={i}>
                     {location.name}
                 </span>
             })}
             </div>}
 
-            {categories.length && <div className="categories">
+            {categories.length > 0 && <div className="categories">
             <span className="result-label">Categories:</span>
-            {categories.map(category => {
-                return <span>
+            {categories.map((category, i) => {
+                return <span key={i}>
                     {category.name}
                 </span>
             })}
