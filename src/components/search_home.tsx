@@ -20,6 +20,7 @@ const SearchHome: React.FC = () => {
 
     const initSearchDataState: DataState = {
         isFetching: false,
+        hasFetched: false,
         response: null,
         filteredResponse: null,
         filters: null
@@ -32,18 +33,16 @@ const SearchHome: React.FC = () => {
         let results: any = dataState.response?.results
         let filters: any = dataState.filters
         if (!!results && !!filters) {
-            debugger
         Object.keys(filters).map((key: any) => {
             switch(key) {
                 case "company":
                     results = results?.filter((result: any) => result.company.name === filters[key])
-                    debugger
                     break
                 case "level":
-                    results = results?.filter((result: any) => [...result.levels.filter((level: any) => level.name === filters[key])])
+                    results = results?.filter((result: any) => !!result.levels.find((level: any) => level.name === filters[key]) )
                     break
                 case "location":
-                    results = results?.filter((result: any) => [...result.locations.filter((location: any) => location.name === filters[key])])
+                    results = results?.filter((result: any) => !!result.locations.find((location: any) => location.name === filters[key]))
                     break
                 case "category":
                     results = results?.filter((result: any) => result.company.name === filters[key])
@@ -69,7 +68,7 @@ const SearchHome: React.FC = () => {
         const url = generateSearchUrl(queryString)
         axios.get(url).then((response: any) => {
             const data = response.data
-            setDataState({response: data, isFetching: false, filteredResponse: data, filters: null})
+            setDataState({response: data, isFetching: false, filteredResponse: data, filters: null, hasFetched: true})
         })
         .catch((message: APIError) => {
             return new Error(`${message.code}: ${message.error}`)
@@ -87,8 +86,10 @@ const SearchHome: React.FC = () => {
         setDataState({...dataState, filters: {...dataState.filters, ...filterObj}})
 
     }
+    const clearFilters = () => {
+        setDataState({...dataState, filters: null})
+    }
 
-    console.log(dataState)
 
     return (
         <div className="search-bar">
@@ -108,8 +109,9 @@ const SearchHome: React.FC = () => {
             </Row>
         </Col>
         </Row>
+        {!!dataState.response?.results?.length && <FilterBar clearFilters={clearFilters} results={dataState?.response.results} onSelect={filterResults} />}
+        {!dataState.filteredResponse?.results?.length && dataState.hasFetched && <div>No results</div>}
         {!!dataState.filteredResponse?.results?.length && !!dataState.response?.results?.length && <>
-        <FilterBar results={dataState.response.results} onSelect={filterResults} />
         
             <SearchResults 
             page={dataState.response.page}

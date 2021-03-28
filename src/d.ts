@@ -85,6 +85,7 @@ export interface Filters {
 
 export interface DataState {
     isFetching: boolean
+    hasFetched: boolean,
     response: SearchResponse | null
     filteredResponse: any 
     filters: Filters | null

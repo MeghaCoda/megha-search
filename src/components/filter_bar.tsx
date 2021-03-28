@@ -1,10 +1,11 @@
 import "../assets/scss/filter_bar.scss"
 import { SearchResult } from "../d"
-import { Select } from "antd"
+import { Select, Button } from "antd"
 
 interface FilterProps {
     results: SearchResult[],
-    onSelect: Function
+    onSelect: Function,
+    clearFilters: Function
     
 }
     /* my usual trick of converting the Array to a Set and back again wasn't working, so I wrote this.
@@ -26,7 +27,7 @@ interface FilterProps {
         return newArr
     }
 const FilterBar: React.FC<FilterProps> = props => {
-    const { onSelect } = props
+    const { onSelect, clearFilters } = props
 
     const levels = props.results.map(result =>  result.levels.map(level => level.name))
     const companies = props.results.map(result => result.company.name)
@@ -53,6 +54,7 @@ const FilterBar: React.FC<FilterProps> = props => {
                 <span className="filter-label">Level</span>
                 <Select style={{width: "200px"}} onChange={(value) => onSelect({ level: value})}>
                     {uniqueLevels.map((level:any, i: number) => {
+
                         return <Select.Option key={i} value={level}>{level}</Select.Option>
                     })}
                 </Select>
@@ -61,6 +63,7 @@ const FilterBar: React.FC<FilterProps> = props => {
                 <span className="filter-label">Location</span>
                 <Select style={{width: "200px"}} onChange={(value) => onSelect({ location: value})}>
                     {uniqueLocations.map((location:any, i: number) => {
+  
                         return <Select.Option key={i} value={location}>{location}</Select.Option>
                     })}
                 </Select>
@@ -73,6 +76,7 @@ const FilterBar: React.FC<FilterProps> = props => {
                     })}
                 </Select>
             </div>
+            <Button aria-label="clear filters" onClick={() => clearFilters()}>Clear Filters</Button>
         </div>
         </div>
         
