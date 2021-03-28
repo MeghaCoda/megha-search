@@ -39,8 +39,9 @@ Launches the test runner in the interactive watch mode.\
 - Add usage of Context - I got tripped up trying to make Context work with Typescript
 - Improve JS bundling to remove unused Javascript, which is making the app painfully slow on mobile 0_0
 - Add testing
-- Add ESLint comments 
+- fix existing ESLint warnings
 - Consider a library other than Ant Design Library. While it might be pretty, it's SLOWWWW.
+- Add more comments 
 - Test in other browsers
 - Use global variables in sass files for spacing and colors
 - Add functional page navigation

@@ -1,6 +1,5 @@
 import React from "react"
 import { SearchResult } from "../d"
-import { generateSearchUrlFromID } from "../helpers/search"
 import FullResult from "./full_result"
 import "../assets/scss/single_result.scss"
 
@@ -55,6 +54,7 @@ const SingleResult: React.FC<Props> = props => {
                 <span className="result-label description">Description:</span> {shortDesc}... 
                 <a className="view-full-description"
                 href={`${window.location.origin}?id=${id}`}
+                target="_blank"
                 aria-label="View Full Description">View Full Job Description</a>
             </div>}
             {props.fullView && <FullResult result={props.result} />}

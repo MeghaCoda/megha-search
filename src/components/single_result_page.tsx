@@ -37,7 +37,6 @@ const SingleResultPage: React.FC<SingleResultPageProps> = props => {
         getSearchResultFromID(id)
     },[])
 
-    console.log(JSON.stringify(dataState))
 
     if (dataState.response) {
         return <SingleResult result={dataState.response as unknown as SearchResult} fullView={true} />
