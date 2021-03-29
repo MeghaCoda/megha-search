@@ -20,25 +20,21 @@ To run the project, run `npm start`
 
 ### `npm start`
 
-Runs the app in the development mode.\
+Runs the app in the development mode.
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-
 ### Known bugs
-- pressing the down key does not let you navigate through filter select elements - not accessible
+- Pressing the down key does not let you navigate through filter select elements - not accessible
 - Filters do not clear properly 
 
 ### Roadmap
 
+- Add jest tests
 - Remove usage of 'any' type throughout the application
 - Add usage of Context - I got tripped up trying to make Context work with Typescript
 - Improve JS bundling to remove unused Javascript, which is making the app painfully slow on mobile 0_0
-- Add testing
 - fix existing ESLint warnings
 - Consider a library other than Ant Design Library. While it might be pretty, it's SLOWWWW.
 - Add more comments 

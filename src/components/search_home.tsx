@@ -40,7 +40,7 @@ const SearchHome: React.FC = () => {
         let results: any = dataState.response?.results
         let filters: any = dataState.filters
         if (!!results && !!filters) {
-        Object.keys(filters).map((key: any) => {
+        Object.keys(filters).forEach((key: any) => {
             switch(key) {
                 case "company":
                     results = results?.filter((result: any) => result.company.name === filters[key])
