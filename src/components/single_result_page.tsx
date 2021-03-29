@@ -32,10 +32,12 @@ const SingleResultPage: React.FC<SingleResultPageProps> = props => {
             return new Error(`${message.code}: ${message.error}`)
         })
     }
-
+    /* eslint-disable */
+    /* why does the linter want me to add getSearchResultFromID and id as dependencies? */ 
     useEffect(() => {
         getSearchResultFromID(id)
     },[])
+    /* eslint-enable */
 
 
     if (dataState.response) {

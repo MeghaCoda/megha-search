@@ -65,8 +65,14 @@ const SearchHome: React.FC = () => {
         setDataState(
             {...dataState, 
                 filteredResponse: {...newFilteredResponse} })
-
+                /* unsure why the linter wants me to add dataState as a dependency.
+                1) This function shouldn't trigger when other portions of dataState
+                change. 
+                2) setting dataState as a dependency triggers an infinite loop. */
+                /* eslint-disable */
+                
     }, [dataState.filters])
+    /* eslint-enable */
 
     const invalidQuery = !isValidQuery(searchState.name)
 

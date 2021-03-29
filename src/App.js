@@ -1,5 +1,4 @@
 import SearchHome from "./components/search_home.tsx"
-import { Col, Row } from "antd"
 import "antd/dist/antd.css"
 import "./assets/scss/App.scss"
 

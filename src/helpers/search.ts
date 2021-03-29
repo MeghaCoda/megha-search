@@ -19,7 +19,7 @@ export const getQueryStringsFromState = (state: SearchQueryParams):any => { // b
     let anyState = state as any 
     const keys = Object.keys(anyState)
     let queryObj: any = {} 
-    keys.map(key => {
+    keys.forEach(key => {
         if (!!anyState[key]) {
             queryObj[key] = anyState[key]
         }
