@@ -30,7 +30,7 @@ The page will reload if you make edits.
 - Filters do not clear properly 
 
 ### Roadmap
-
+- Add loading state to search home page
 - Add jest tests
 - Remove usage of 'any' type throughout the application
 - Add usage of Context - I got tripped up trying to make Context work with Typescript
