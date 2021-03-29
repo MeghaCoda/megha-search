@@ -55,6 +55,7 @@ const SingleResult: React.FC<Props> = props => {
                 <a className="view-full-description"
                 href={`${window.location.origin}?id=${id}`}
                 target="_blank"
+                rel="noreferrer"
                 aria-label="View Full Description">View Full Job Description</a>
             </div>}
             {props.fullView && <FullResult result={props.result} />}
