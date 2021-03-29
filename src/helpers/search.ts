@@ -7,12 +7,14 @@ export const isValidQuery = (query: string):boolean => {
 
 
 export const generateSearchUrl = (queryString: string):string => {
-    const baseUrl = "https://www.themuse.com/api/public/jobs"
+    // url name is split so it cannot be searched, per the company's request
+    const baseUrl = "https://www.themu" + "se.com/api/public/jobs" //eslint-disable-line
     return `${baseUrl}?${queryString}`
 }
 
 export const generateSearchUrlFromID = (id: string):string => {
-    return `https://www.themuse.com/api/public/jobs/${id}`
+    // url name is split so it cannot be searched, per the company's request
+    return "https://www.themu" + "se.com/api/public/jobs/" +id // eslint-disable-line
 }
 
 export const getQueryStringsFromState = (state: SearchQueryParams):any => { // booooo any's >_<

@@ -108,7 +108,7 @@ const SearchHome: React.FC = () => {
         <>
         <Row>
         <Col span={12} className="full-width-col text-center">
-           <h1>Muse Searcher</h1>
+           <h1>Megha Search</h1>
            <a href={window.location.origin}>Go to search</a>
            <SingleResultPage id={initialID} />
            </Col>
@@ -124,7 +124,7 @@ const SearchHome: React.FC = () => {
         <div className="search-bar">
         <Row>
         <Col span={12} className="full-width-col text-center">
-           <h1>Muse Searcher</h1>
+           <h1>Megha Search</h1>
            <Row>
             <Col xs={12} lg={3}>
                 <label htmlFor="search-input">Search for jobs by title:</label>
