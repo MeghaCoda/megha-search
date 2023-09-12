@@ -1,6 +1,6 @@
 # Getting Started 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). It uses a public API (intentionally unspecified per the company's request) and allows the user to query job searches by title. 
+This project was created in a day as part of a coding test for a job (which I fortunately landed!). It was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). It uses a public API (intentionally unspecified per the company's request) and allows the user to query job searches by title. 
 [Sanitize HTML](https://www.npmjs.com/package/sanitize-html) was used to sanitize HTML returned from the API for security purposes. 
 API request are made using [Axios](https://www.npmjs.com/package/axios).
 Site is designed to be navigable via tabs for accessibility purposes.
